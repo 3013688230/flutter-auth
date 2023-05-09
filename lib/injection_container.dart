@@ -11,6 +11,7 @@ import 'features/domain/usecases/forgot_password_usecase.dart';
 import 'features/domain/usecases/get_all_users_usecase.dart';
 import 'features/domain/usecases/get_create_current_user_usecase.dart';
 import 'features/domain/usecases/get_current_uid_usecase.dart';
+import 'features/domain/usecases/get_update_user_usecase.dart';
 import 'features/domain/usecases/google_sign_in_usecase.dart';
 import 'features/domain/usecases/is_sign_in_usecase.dart';
 import 'features/domain/usecases/sign_in_usecase.dart';
@@ -59,6 +60,8 @@ Future<void> init() async {
       () => SignOutUseCase(repository: sl.call()));
   sl.registerLazySingleton<GetAllUsersUseCase>(
       () => GetAllUsersUseCase(repository: sl.call()));
+  sl.registerLazySingleton<GetUpdateUserUseCase>(
+      () => GetUpdateUserUseCase(repository: sl.call()));
 
   //Repository
   sl.registerLazySingleton<FirebaseRepository>(

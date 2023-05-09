@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 
 import 'theme/style.dart';
 
@@ -21,7 +22,10 @@ class TextPasswordWidget extends StatefulWidget {
 }
 
 class _TextPasswordWidgetState extends State<TextPasswordWidget> {
+  final TextEditingController controller2 = TextEditingController();
   bool isObsecureText = true;
+  bool success = false;
+  late bool _isShowPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +36,48 @@ class _TextPasswordWidgetState extends State<TextPasswordWidget> {
         color: color747480.withOpacity(.2),
         borderRadius: BorderRadius.circular(10.0),
       ),
-      child: TextField(
-        obscureText: isObsecureText,
-        keyboardType: widget.keyboardType,
-        controller: widget.controller,
-        decoration: InputDecoration(
-          hintText: widget.hintText,
-          border: InputBorder.none,
-          suffixIcon: InkWell(
-            onTap: () {
-              setState(() {
-                isObsecureText = !isObsecureText;
-              });
-            },
-            child: Icon(
-              isObsecureText == true
-                  ? Icons.panorama_fish_eye
-                  : Icons.remove_red_eye,
+      child: Column(
+        children: [
+          TextField(
+            obscureText: isObsecureText,
+            keyboardType: widget.keyboardType,
+            controller: widget.controller,
+            decoration: InputDecoration(
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    _isShowPassword = _isShowPassword == false ? true : false;
+                  });
+                },
+                child: Icon(_isShowPassword == false
+                    ? Icons.remove_red_eye
+                    : Icons.panorama_fish_eye),
+              ),
+              prefixIcon: const Icon(
+                Icons.lock,
+                color: Colors.grey,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                    color: Color.fromARGB(255, 207, 207, 207), width: 2),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              floatingLabelStyle: const TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                    color: success ? Colors.green : Colors.red, width: 2),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              hintText: widget.hintText,
+              border: const OutlineInputBorder(
+                borderSide: BorderSide(),
+              ),
             ),
           ),
-          prefixIcon: Icon(widget.prefixIcon),
-        ),
+        ],
       ),
     );
   }

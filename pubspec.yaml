@@ -30,9 +30,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   get_it: ^7.3.0
   flutter_bloc: ^8.1.2
+  flutter_screenutil: ^5.7.0
   equatable: ^2.0.5
-  #flutter_icons: ^1.1.0
-  #antdesign_icons: ^0.0.3
+  validators: ^3.0.0
+  google_fonts: ^4.0.4
+  flutter_pw_validator: ^1.5.0
   material_design_icons_flutter: ^6.0.7096
   cached_network_image: ^3.2.3
 

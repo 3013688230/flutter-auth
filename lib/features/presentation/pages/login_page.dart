@@ -25,8 +25,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  late bool _isShowPassword = true;
   final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey<ScaffoldState>();
+  bool isObsecureText = true;
+  late bool _isShowPassword = true;
 
   @override
   void dispose() {
@@ -38,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       key: _scaffoldState,
       body: BlocConsumer<CredentialCubit, CredentialState>(
         listener: (context, credentialState) {
@@ -103,28 +105,32 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(
               height: 17,
             ),
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                color: color747480.withOpacity(.2),
-                borderRadius: const BorderRadius.all(Radius.circular(10)),
-              ),
-              child: TextField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.grey,
-                  ),
-                  hintText: 'Email',
-                  hintStyle: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400),
-                  border: InputBorder.none,
-                ),
-              ),
+            // Container(
+            //   height: 50,
+            //   width: MediaQuery.of(context).size.width,
+            //   decoration: BoxDecoration(
+            //     color: color747480.withOpacity(.2),
+            //     borderRadius: const BorderRadius.all(Radius.circular(10)),
+            //   ),
+            //   child: TextField(
+            //     controller: _emailController,
+            //     decoration: const InputDecoration(
+            //       prefixIcon: Icon(
+            //         Icons.email,
+            //         color: Colors.grey,
+            //       ),
+            //       hintText: 'Email',
+            //       hintStyle: TextStyle(
+            //           color: Colors.grey,
+            //           fontSize: 17,
+            //           fontWeight: FontWeight.w400),
+            //       border: InputBorder.none,
+            //     ),
+            //   ),
+            // ),
+            TextContainerWidget(
+              controller: _emailController,
+              hintText: 'Email',
             ),
             const SizedBox(
               height: 10,
@@ -139,30 +145,40 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 obscureText: _isShowPassword,
                 controller: _passwordController,
+                style: const TextStyle(color: Colors.white),
+                showCursor: true,
+                cursorColor: Colors.white,
                 decoration: InputDecoration(
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isShowPassword =
+                            _isShowPassword == false ? true : false;
+                      });
+                    },
+                    child: Icon(_isShowPassword == false
+                        ? Icons.remove_red_eye
+                        : Icons.panorama_fish_eye),
+                  ),
                   prefixIcon: const Icon(
                     Icons.lock,
                     color: Colors.grey,
                   ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: Color.fromARGB(255, 207, 207, 207), width: 2),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   hintText: 'Password',
                   hintStyle: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 17,
-                      fontWeight: FontWeight.w400),
-                  border: InputBorder.none,
-                  suffixIcon: InkWell(
-                      onTap: () {
-                        setState(() {
-                          _isShowPassword =
-                              _isShowPassword == false ? true : false;
-                        });
-                      },
-                      child: Icon(_isShowPassword == false
-                          ? Icons.remove_red_eye
-                          : Icons.panorama_fish_eye)),
+                    color: Colors.grey,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
             ),
+            //TextPasswordWidget(),
             const SizedBox(
               height: 8,
             ),
@@ -214,7 +230,11 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   const Text(
                     "don't have an Account",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
                   ),
                   const SizedBox(
                     width: 5,

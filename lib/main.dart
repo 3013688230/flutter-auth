@@ -35,10 +35,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        darkTheme: ThemeData.dark(),
         title: 'Auth App',
-        theme: ThemeData(
-          primarySwatch: Colors.green,
-        ),
+        theme: ThemeData.light(),
         onGenerateRoute: OnGenerateRoute.route,
         initialRoute: '/',
         routes: {

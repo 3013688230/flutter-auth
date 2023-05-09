@@ -17,6 +17,7 @@ import '../widgets/row_text_widget.dart';
 import '../widgets/text_container_widget.dart';
 import '../widgets/text_password_widget.dart';
 import '../widgets/theme/style.dart';
+import '../widgets/username_textfield.dart';
 import 'home_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -84,6 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       key: _scaffoldState,
       body: BlocConsumer<CredentialCubit, CredentialState>(
         listener: (context, credentialState) {
@@ -163,7 +165,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       borderRadius: const BorderRadius.all(Radius.circular(50)),
                     ),
                     child: const ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(50)),
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
                   ),
                   const SizedBox(
@@ -182,7 +184,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(
               height: 17,
             ),
-            TextContainerWidget(
+            UsernameTextField(
               controller: _userNameController,
               keyboardType: TextInputType.text,
               hintText: 'Username',
@@ -343,7 +345,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   const Text(
                     'Do you have already an account?',
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
+                    ),
                   ),
                   const SizedBox(
                     width: 5,

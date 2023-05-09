@@ -154,10 +154,12 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
     print(user.name);
     final userCollection = fireStore?.collection("users");
 
-    if (user.phoneNumber != null && user.phoneNumber != "")
+    if (user.phoneNumber != null && user.phoneNumber != "") {
       userInformation["phoneNumber"] = user.phoneNumber;
-    if (user.name != null && user.name != "")
+    }
+    if (user.name != null && user.name != "") {
       userInformation["name"] = user.name;
+    }
 
     userCollection?.doc(user.uid).update(userInformation);
   }
